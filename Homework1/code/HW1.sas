@@ -109,6 +109,13 @@ proc sgplot data = blood;
 	scatter x = viscosity y = PCV;
 run;
 
+title1 "PHC6937 Homework #1";
+title2 "Question 3.a";
+title3 "Scatter plot Between Viscosity level and Fibrinogen";
+proc sgploat data = blood;
+	scatter x = viscosity y = fibrinogen;
+run;
+
 * get the median of viscosity level;
 data medq;
 	set viscoq;
