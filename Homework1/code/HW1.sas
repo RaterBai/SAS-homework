@@ -1,7 +1,7 @@
 ******************************************
 *TITLE: HOMEOWRK #1
 *
-*DESCRIPTION: 
+*DESCRIPTION: BASIC SAS OPERATIONS
 *
 *-------------------------------------------
 *PROGRAM NAME: HW1.SAS
@@ -14,6 +14,7 @@
 *********************************************;
 
 %let path = M:\Desktop\SAS\Homework1\data;
+
 *create a sas library;
 libname bloodlib "&path";
 
@@ -32,18 +33,18 @@ run;
 title1 "PHC6937 Homework #1";
 title2 "Question 2.a";
 title3 "Descriptive Info of Blood Dataset";
-proc contents data = bloodlib.blood;
+proc contents data = blood;
 run;
 
 * print the dataset;
 title1 "PHC6937 Homework #1";
 title2 "Question 2.a";
 title3 "Listing of Blood Dataset";
-proc print data = bloodlib.blood;
+proc print data = blood;
 run;
 
 * sort data by viscosity level;
-proc sort data = bloodlib.blood output = sorted_blood;
+proc sort data = blood output = sorted_blood;
 	by viscosity;
 run;
 
@@ -54,16 +55,18 @@ proc print data = sorted_blood;
 run;
 
 * create descriptive info for variable viscosity;
-proc univariate data = bloodlib.blood;
+proc univariate data = blood;
 	title1 "PHC6937 Homework #1";
 	title2 "Question 2.c";
 	title3 "Description of Viscosity level";
 	var viscosity;
 	histogram viscosity;
+	ods output quantiles = viscoq; *output the quantile of viscosity;
+	*output out = med median = medv;
 run;
 
 * create descriptive info for variable PCV;
-proc univariate data = bloodlib.blood;
+proc univariate data = blood;
 	title1 "PHC6937 Homework #1";
 	title2 "Question 2.c";
 	title3 "Description of PCV (packed cell volume)";
@@ -72,7 +75,7 @@ proc univariate data = bloodlib.blood;
 run;
 
 * create descriptive info for variable fibrinogen;
-proc univariate data = bloodlib.blood;
+proc univariate data = blood;
 	title1 "PHC6937 Homework #1";
 	title2 "Question 2.c";
 	title3 "Description of Fibrinogen";
@@ -81,7 +84,7 @@ proc univariate data = bloodlib.blood;
 run;
 
 * create descriptive info for variable protein;
-proc univariate data = bloodlib.blood;
+proc univariate data = blood;
 	title1 "PHC6937 Homework #1";
 	title2 "Question 2.c";
 	title3 "Description of Protein";
@@ -93,7 +96,7 @@ run;
 title1 "PHC6937 Homework #1";
 title2 "Question 3.a";
 title3 "Correlation Analysis";
-proc corr data = bloodlib.blood;
+proc corr data = blood;
 	var viscosity PCV fibrinogen protein;
 run;
 
@@ -102,6 +105,38 @@ run;
 title1 "PHC6937 Homework #1";
 title2 "Question 3.a";
 title3 "Scatter plot Between Viscosity level and PCV";
-proc sgplot data = bloodlib.blood;
+proc sgplot data = blood;
 	scatter x = viscosity y = PCV;
+run;
+
+* get the median of viscosity level;
+data medq;
+	set viscoq;
+	if quantile = "50% Median";
+	drop varname quantile;
+run;
+
+* merge the median of viscosity dataset and blood dataset together;
+data blood_vmed;
+	merge bloodlib.blood medq;
+	retain medianv;
+	if _N_ = 1 then medianv = estimate;
+	drop estimate;
+run;
+
+* classify viscosity level and assign the class to a new variable;
+data blood2;
+	set blood_vmed;
+	length vLevel $4; 
+	if viscosity < medianv then vLevel = "Low";
+	else if viscosity >= medianv then vLevel = "High";
+run;
+
+* create descriptive statistics for each variable by vLevel;
+title1 "PHC6937 Homework #1";
+title2 "Question 3.c";
+title3 "Descriptive Statistics by Viscosity Level";
+proc means data = blood2 min max median mean stddev ndec=2;
+var PCV fibrinogen protein;
+class vLevel;
 run;
