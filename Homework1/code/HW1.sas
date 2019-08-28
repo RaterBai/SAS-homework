@@ -18,6 +18,8 @@
 *create a sas library;
 libname bloodlib "&path";
 
+*HW1 Question 1;
+
 * create a dataset to store blood info;
 data bloodlib.blood;
 	infile "&path\blood.dat.txt" firstobs = 2; *Read this file start from the second row, first row is the variable name;
@@ -28,6 +30,8 @@ run;
 data blood;
 	set bloodlib.blood;
 run;
+
+*HW1 Question2;
 
 * create descriptive info for the dataset;
 title1 "PHC6937 Homework #1";
@@ -91,6 +95,8 @@ proc univariate data = blood;
 	var protein;
 	histogram protein;
 run;
+
+*HW1 Question3;
 
 * calculate correlation coefficients;
 title1 "PHC6937 Homework #1";
