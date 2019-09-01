@@ -16,7 +16,8 @@
 * Part 1 Question 1;
 * input data;
 data pamidronate;
-	input  TRT $ SKEL_EVT $ cnt;
+	length TRT $11;
+	input TRT $ SKEL_EVT $ cnt;
 	datalines;
 	Pamidronate yes 55
 	Pamidronate no  151
@@ -64,3 +65,52 @@ proc freq data = pamidronate order = data;
 	table TRT * SKEL_EVT /chisq;
 	weight cnt;
 run;
+
+* Part 1 Question 8;
+* relative risk;
+proc freq data = pamidronate order = data;
+	title1 "PHC6937 Homework #2";
+	title2 "Question 1.8";	
+	title3 "Compute Measure Statistics";
+	table TRT * SKEL_EVT /chisq measures;
+	weight cnt;
+run;
+
+* Part 2 Question 9;
+* import data;
+data smoke;
+	input pipsmoke $ lipcancer $ cnt @@;
+	datalines;
+	yes yes 340 yes no 146
+	no  yes 194 no  no 354
+	;
+run;
+
+* Part 2 Question 9;
+* create cross tabulation;
+proc freq data = smoke order = data;
+	table pipsmoke * lipcancer;
+	weight cnt;
+run;
+
+* Part 2 Question 11;
+* Chi-square test for independence;
+proc freq data = smoke order = data;
+	table pipsmoke * lipcancer /chisq;
+	weight cnt;
+run;
+
+* Part 2 Question 12;
+* relative association measure;
+proc freq data = smoke order = data;
+	table pipsmoke * lipcancer /chisq measures;
+	weight cnt;
+run;
+
+
+
+
+
+
+
+
