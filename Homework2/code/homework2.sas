@@ -89,13 +89,28 @@ run;
 * Part 2 Question 9;
 * create cross tabulation;
 proc freq data = smoke order = data;
+	title1 "PHC6937 Homework #2";
+	title2 "Question 2.9";	
+	title3 "Cross tabulation";
 	table pipsmoke * lipcancer;
+	weight cnt;
+run;
+
+* calculate expected frequency;
+proc freq data = smoke order = data;
+	title1 "PHC6937 Homework #2";
+	title2 "Question 2.9";	
+	title3 "Check Chi-Square Test Assumption";
+	table pipsmoke * lipcancer /expected;
 	weight cnt;
 run;
 
 * Part 2 Question 11;
 * Chi-square test for independence;
 proc freq data = smoke order = data;
+	title1 "PHC6937 Homework #2";
+	title2 "Question 2.11";	
+	title3 "Chi-Square Test";
 	table pipsmoke * lipcancer /chisq;
 	weight cnt;
 run;
