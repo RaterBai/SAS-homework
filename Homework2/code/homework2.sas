@@ -106,12 +106,12 @@ proc freq data = smoke order = data;
 run;
 
 * Part 2 Question 11;
-* Chi-square test for independence;
+* McNemar's test for independence;
 proc freq data = smoke order = data;
 	title1 "PHC6937 Homework #2";
 	title2 "Question 2.11";	
-	title3 "Chi-Square Test";
-	table pipsmoke * lipcancer /chisq;
+	title3 "McNemar's Test";
+	table pipsmoke * lipcancer /agree;
 	weight cnt;
 run;
 
