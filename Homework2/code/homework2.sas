@@ -19,7 +19,7 @@ data pamidronate;
 	length TRT $11;
 	input TRT $ SKEL_EVT $ cnt;
 	datalines;
-	Pamidronate yes 55
+	Pamidronate yes 57
 	Pamidronate no  151
 	Placebo     yes 77
 	Placebo     no  109
