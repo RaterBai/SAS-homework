@@ -4,7 +4,7 @@
 *DESCRIPTION: Randomization and Power Analysis
 *
 *-------------------------------------------
-*PROGRAM NAME: HOMEWORK2.SAS
+*PROGRAM NAME: HOMEWORK3.SAS
 *LANGUAGE: SAS, VERSION 9.4
 *
 *NAME: CHEN BAI
