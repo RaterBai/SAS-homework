@@ -39,7 +39,7 @@ proc power;
 	title2 "Question 2.d";
 	title3 "Sample Size Calculation";
 	twosamplefreq
-	groupproportions = (0.55 0.75)
+	groupproportions = (0.55 0.7)
 	power = 0.80
 	nperg = .;
 run;
@@ -53,7 +53,7 @@ proc power;
 	twosamplefreq
 	groupproportions = (0.55 0.6) (0.55 0.65) (0.55, 0.7) (0.55 0.75)
 	power = .
-	nperg = 89;
+	nperg = 163;
 run;
 
 * reformat power table;
@@ -83,7 +83,7 @@ proc power;
 	twosamplefreq
 	groupproportions = (0.55 0.55)
 	power = .
-	nperg = 89;
+	nperg = 163;
 run;
 
 * Question 2 Part g;
