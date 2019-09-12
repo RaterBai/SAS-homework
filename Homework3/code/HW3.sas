@@ -68,11 +68,25 @@ proc print data = powertable;
 run;
 
 * Question 2 Part f;
-* draw a plot of power table;
-proc sgplot data = powertable;
+ods output output = powertable;
+proc power;
+	twosamplefreq
+	groupproportions = 0.55 | 0.55 to 0.99 by 0.01  
+	power = .
+	nperg = 163;
+run;
+
+data powertable;
+	set powertable (rename = (Proportion2 = Intervention_success_rate));
+	keep Intervention_success_rate power;
+run;
+
+proc gplot data = powertable;
 	title2 "Question 2.f";
 	title3 "Power Plot";
-	scatter X = Intervention_success_rate Y = power;
+	symbol1 interpol=join
+        value=dot;
+	plot power*Intervention_success_rate;
 run;
 
 * Question 2 Part g;
