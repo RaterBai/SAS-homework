@@ -1,14 +1,14 @@
 ******************************************
-*TITLE: HOMEOWRK #4
+*TITLE: HOMEOWRK #5
 *
-*DESCRIPTION: ANOVA 
+*DESCRIPTION: Correlation & SLR 
 *
 *-------------------------------------------
-*PROGRAM NAME: HOMEWORK4.SAS
+*PROGRAM NAME: HW5.SAS
 *LANGUAGE: SAS, VERSION 9.4
 *
 *NAME: CHEN BAI
-*DATE: 09/20/2019
+*DATE: 09/30/2019
 *--------------------------------------------
 *
 *********************************************;
