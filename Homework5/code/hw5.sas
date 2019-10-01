@@ -47,6 +47,7 @@ proc sgplot data = platelet;
 run;
 
 * non-parametric correlation test;
+title2 "Question3";
 title3 "Spearman's Test of Platelet Count & PDGF";
 proc corr data = platelet fisher;
 	var pltcnt g_pdgf;
@@ -58,13 +59,23 @@ proc corr data = platelet fisher;
 run;
 
 * fit a SLM to PDGF & Platelet count;
-title3 "SLM on PDGF & Platelet Count";
+title2 "Question4";
+title3 "SLR on PDGF & Platelet Count";
 proc reg data = platelet;
 	model g_pdgf = pltcnt;
 run;
 
 * use anova to test whehter mean PDGF counts differ by age group;
+title3 "ANOVA on PDGF & age";
 proc anova data = platelet;
 	class ptage;
 	model g_pdgf = ptage;
+run;
+
+* use two sample t-test to test mean difference;
+title2 "Question5";
+title3 "T-Test on PDGF & Age";
+proc ttest data = platelet;
+	class ptage;
+	var g_pdgf;
 run;
