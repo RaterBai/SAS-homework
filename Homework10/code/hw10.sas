@@ -107,29 +107,8 @@ quit;
 
 %ex_fev(data.fev1, ht);
 
-* simulation data;
-%let N = 500;
-data simdata;
-	do i = 1 to &N;
-		x1 = rand("Normal");
-		x2 = rand("Normal");
-		x3 = rand("Bernoulli", 0.5);
-		e = rand("Normal");
-		y = 0.3 + 0.5*x3 + x1 + x2 + rand("Normal");
-		output;
-	end;
-	keep x1 x2 x3 y;
-run;
-
-ods trace on;
-ods output ParameterEstimates = parms;
-proc reg data = simdata outest=estimates;
-	model y = x3 x2;
-run;
-ods trace off;
-proc print data = estimate;
-run;
-
+* Question 3 part2;
+* Simulation;
 %let Nreps = 500;
 %macro simulate(out);
 options nonotes;
