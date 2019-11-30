@@ -45,7 +45,7 @@ proc iml;
 	print(D);
 	
 	*solve AU = B for U;
-	U = inv(A)*A;
+	U = inv(A)*B;
 	print(U);
 	*;
 quit;
